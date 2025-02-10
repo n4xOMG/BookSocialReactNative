@@ -3,6 +3,9 @@ import { View, Text, Button, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomeScreen = ({ navigation }) => {
+  const editProfile = async () => {
+    navigation.navigate("EditProfileScreen");
+  };
   const logout = async () => {
     await AsyncStorage.removeItem("userToken");
     navigation.navigate("Login");
@@ -11,6 +14,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome Home!</Text>
+      <Button title="Editprofile" onPress={editProfile} />
       <Button title="Logout" onPress={logout} />
     </View>
   );

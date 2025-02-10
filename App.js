@@ -8,6 +8,7 @@ import ForgotPasswordScreen from "./src/screens/ForgotPasswordScreen";
 import OtpVerificationScreen from "./src/screens/OtpVerificationScreen";
 import ResetPasswordScreen from "./src/screens/ResetPasswordScreen";
 import HomeScreen from "./src/screens/HomeScreen";
+import EditProfileScreen from "./src/screens/EditProfileScreen";
 const Stack = createStackNavigator();
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,6 +29,7 @@ export default function App() {
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <Stack.Screen name="OtpVerification" component={OtpVerificationScreen} />
         <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
+        <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>

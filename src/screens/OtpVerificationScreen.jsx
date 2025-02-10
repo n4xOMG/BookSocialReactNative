@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import AuthButton from "../components/AuthButton";
-import { verifyOtp } from "../services/AuthServices";
+import { updateUserEmail, verifyOtp } from "../services/AuthServices";
 
 const OtpVerificationScreen = ({ navigation, route }) => {
-  const { email, context } = route.params;
+  const { email, newEmail, context } = route.params;
   const [otp, setOtp] = useState("");
 
   const handleVerifyOtp = async () => {
     try {
+      console.log("Email: ", email);
       const response = await verifyOtp(email, otp, context);
       alert(response);
       if (response === "OTP verified successfully. Please reset your password.") {
         navigation.navigate("ResetPassword", { email });
       } else if (response === "OTP verified successfully. Registration complete.") {
         navigation.navigate("Login");
+      } else if (response === "OTP verified successfully. Update profile complete") {
+        console.log("New email:", newEmail);
+        await updateUserEmail(newEmail);
+        navigation.navigate("Login");
       }
     } catch (error) {
+      console.log("Error verify OTP:", error.response?.data || error.message);
       alert("OTP verification failed. Please try again.");
     }
   };
